@@ -10,7 +10,7 @@
 # purpose: resolve the hashcode 2021 problems #
 ###############################################
 
-samples = {"A": "testcase/a", "B": "testcase/b", "C": "testcase/c", "D": "testcase/d", "E": "testcase/e", "F": "testcase/f"}
+samples = {"A": "testcase/a.txt", "B": "testcase/b.txt", "C": "testcase/c.txt", "D": "testcase/d.txt", "E": "testcase/e.txt", "F": "testcase/f.txt"}
 # samples is a dict to store the path of the testcases
 
 
@@ -34,8 +34,7 @@ def get_entries(source, filepath=None):
 			car_paths.append((p, names))
 	else:
 		with open(filepath, "r") as file:
-			D, I, S, V, F = list(map(int, file.readline()[:-2].split(" ")))
-			D = []
+			D, I, S, V, F = list(map(int, file.readline()[:-1].split(" ")))
 			B, E, streets_descriptions = [], [], []
 			for i in range(S):
 				b, e, name, l = file.readline().split(" ")
@@ -44,8 +43,8 @@ def get_entries(source, filepath=None):
 
 			car_paths = []
 			for i in range(V):
-				p, names = file.readline().split(" ")
-				p = int(p)
+				line = file.readline().split(" ")
+				p, names = int(line[0]), line[1:]
 				car_paths.append((p, names))
 		
 	return D, I, S, V, F, car_paths, streets_descriptions
@@ -96,12 +95,12 @@ def solution(D, I, S, V, F, car_paths, streets_descriptions, filepath):
 ### Your code goes here##
 # use rad_print instead of print with filepath as first argument
 # ex:	rad_print(filepath, M, T2, T3, T4)
-	pass
+	print(D, I, S, V, F, car_paths, streets_descriptions)
 	
 def main():
 	###Here goes the action you want to do###
 	# create_submissions()
-	# execute_solution()
+	# execute_solution(("A"))
 
 if __name__ == "__main__":
 	main()
