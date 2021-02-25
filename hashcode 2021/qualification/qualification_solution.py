@@ -44,7 +44,7 @@ def get_entries(source, filepath=None):
 
 			car_paths = []
 			for i in range(V):
-				p, names = file.readline()split(" ")
+				p, names = file.readline().split(" ")
 				p = int(p)
 				car_paths.append((p, names))
 		
@@ -92,7 +92,7 @@ def execute_solution(sample=("A", "B", "C", "D", "E", "F"), mode="FILE"):
 		solution(*entries, output)
 
 
-def solution(M, T2, T3, T4, D, filepath):
+def solution(D, I, S, V, F, car_paths, streets_descriptions, filepath):
 ### Your code goes here##
 # use rad_print instead of print with filepath as first argument
 # ex:	rad_print(filepath, M, T2, T3, T4)
