@@ -10,7 +10,7 @@
 # purpose: resolve the hashcode 2022 problems #
 ###############################################
 
-samples = {"A": "testcase/a_example", "B": "testcase/b_little_bit_of_everything.in", "C": "testcase/c_many_ingredients.in", "D": "testcase/d_many_pizzas.in", "E": "testcase/e_many_teams.in"}
+samples = {"A": "testcase/a_an_example.in", "B": "testcase/b_basic.in", "C": "testcase/c_coarse.in", "D": "testcase/d_difficult.in", "E": "testcase/e_elaborate.in"}
 # samples is a dict to store the path of the testcases
 
 
@@ -23,18 +23,28 @@ def get_entries(source, filepath=None):
 	"""
 	
 	if source.upper() == "INPUT":
-		M, T2, T3, T4 = list(map(int, input().split(" ")))
-		D = []
-		for i in range(M):
-			D.append(input())
+		C = int(input())
+		P = []
+		for i in range(C):
+			L = input().split(" ")
+			L[0] = int(L[0])
+			D = input().split(" ")
+			D[0] = int(D[0])
+			P.append([L,D])
 	else:
 		with open(filepath, "r") as file:
-			M, T2, T3, T4 = list(map(int, file.readline()[:-2].split(" ")))
-			D = []
-			for i in range(M):
-				D.append(file.readline())
+			
+			
+			C = int(file.readline().split("\n")[0])
+			P = []
+			for i in range(C):
+				L = (file.readline().split("\n")[0]).split(" ")
+				L[0] = int(L[0])
+				D = (file.readline().split("\n")[0]).split(" ")
+				D[0] = int(D[0])
+				P.append([L,D])
 		
-	return M, T2, T3, T4, D
+	return C, P
 
 
 def rad_print(filepath=None, *params, **params_dict):
@@ -86,10 +96,10 @@ def execute_solution(sample=("A", "B", "C", "D", "E"), mode="FILE"):
 		solution(*entries, output)
 
 
-def solution(M, T2, T3, T4, D, filepath):
+def solution(C, P, filepath):
 ### Your code goes here##
 # use rad_print instead of print with filepath as first argument
-# ex:	rad_print(filepath, M, T2, T3, T4)
+# ex:	rad_print(filepath, C, L, D)
 	pass
 	
 def main():
