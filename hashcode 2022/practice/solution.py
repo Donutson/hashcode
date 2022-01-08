@@ -5,15 +5,20 @@
 # *    *      *   *   *   *   #
 # *       *   *   *   * *     #
 ###############################################
-# Name: base                                  #
+# Name: solution                              #
 # Author: team RAD CODERS                     #
 # purpose: resolve the hashcode 2022 problems #
 ###############################################
-from os import makedirs
+
+######## DON'T DELETE #########
+from classes.base import Base #
+rad_print = Base.rad_print    #
+###############################
+
+from classes.client import Client
 
 samples = {"A": "testcase/a_an_example.in", "B": "testcase/b_basic.in", "C": "testcase/c_coarse.in", "D": "testcase/d_difficult.in", "E": "testcase/e_elaborate.in"}
 # samples is a dict to store the path of the testcases
-
 
 def get_entries(source, filepath=None):
 	""" 
@@ -22,6 +27,7 @@ def get_entries(source, filepath=None):
 	filepath: a string to indicate the location of the file containing the entries 
 	Need to be adapt to the problem
 	"""
+	#### Here goes the logic to retrieve the problem input #####
 	
 	if source.upper() == "INPUT":
 		C = int(input())
@@ -47,69 +53,30 @@ def get_entries(source, filepath=None):
 		
 	return C, P
 
-
-def rad_print(filepath=None, *params, **params_dict):
-	""" 
-	Work as the built-in print,the difference is that we first give a filepath where the output will be stock. 
-	If you want to display the output at screen just set filepath to None 
-	"""
-	
-	if filepath:
-		with open(filepath, "w") as file:
-			print(file=file, *params, **params_dict)
-	else:
-		print(*params, **params_dict)
-
-
-def create_submissions(sample=("A", "B", "C", "D", "E")):
-	""" 
-	Create the submissions files for the specify tests cases in sample.
-	sample: a tuple containing the cases for which we want submissions files 
-	"""
-	
-	makedirs("submissions")
-	
-	for i in sample:
-		filepath = samples[i.upper()]
-		output = "submissions/"+i
-		entries = get_entries("FILE",filepath)
-		solution(*entries, output)
-		
-	print("All submissions file has been created in a folder call submissions!!")
-
-
-def execute_solution(sample=("A", "B", "C", "D", "E"), mode="FILE"):
-	""" 
-	Execute our solution on all the specify tests cases in sample and display the output at standard output,
-	we use it to see if our solution do what we expect from it
-	sample: a tuple containing all the cases for which we want to execute our solution
-	mode: a string specifying the way the entries are retrieve, FILE if it's from a file or INPUT if it's from keyboard typing 
-	"""
-	
-	output = None
-	
-	if mode == "INPUT":
-		sample = ()
-		entries = get_entries(mode)
-		solution(*entries, output)
-		
-	for i in sample:
-		filepath = samples[i.upper()]
-		entries = get_entries(mode,filepath)
-		solution(*entries, output)
-
-
 def solution(C, P, filepath):
-### Your code goes here##
+### Your code goes here ##
 # use rad_print instead of print with filepath as first argument
-# ex:	rad_print(filepath, C, L, D)
-	pass
+# ex:	rad_print(filepath, C, P)
 	
-def main():
-	###Here goes the action you want to do###
-	# create_submissions()
-	# execute_solution()
-	pass
+	clients = []
+	for L, D in P:
+		client = Client(L,D)
+		clients.append(client)
+	ingredients = set()
+	for client in clients:
+		ingredients.update(client.L)
+		ingredients = ingredients - client.D
+	rad_print(filepath, len(ingredients), *ingredients)
 
-if __name__ == "__main__":
-	main()
+##### DON'T ADD OR DELETE LINE #####################
+#     JUST UNCOMMENT THE CALLED METHOD             #
+#     AND CHANGE THEIR ARGUMENTS TO MEET YOUR NEED #
+def main():                                        #
+	### Here goes the action you want to do ########  
+	base = Base(samples, get_entries, solution)    #
+	base.create_submissions()                    #
+	# base.execute_solution(("A"))                 #
+                                                   #
+if __name__ == "__main__":                         #
+	main()                                         #
+####################################################
