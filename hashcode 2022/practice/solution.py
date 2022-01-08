@@ -69,7 +69,7 @@ def solution(C, P, filepath):
 	rad_print(filepath, len(ingredients), *ingredients)
 
 ##### DON'T ADD OR DELETE LINE #####################
-#     JUST UNCOMMENT THE CALLED METHOD             #
+#     JUST UNCOMMENT THE CALLED METHOD YOU NEED    #
 #     AND CHANGE THEIR ARGUMENTS TO MEET YOUR NEED #
 def main():                                        #
 	### Here goes the action you want to do ########  
