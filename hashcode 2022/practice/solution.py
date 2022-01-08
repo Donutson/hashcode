@@ -9,6 +9,7 @@
 # Author: team RAD CODERS                     #
 # purpose: resolve the hashcode 2022 problems #
 ###############################################
+from os import makedirs
 
 samples = {"A": "testcase/a_an_example.in", "B": "testcase/b_basic.in", "C": "testcase/c_coarse.in", "D": "testcase/d_difficult.in", "E": "testcase/e_elaborate.in"}
 # samples is a dict to store the path of the testcases
@@ -65,6 +66,8 @@ def create_submissions(sample=("A", "B", "C", "D", "E")):
 	Create the submissions files for the specify tests cases in sample.
 	sample: a tuple containing the cases for which we want submissions files 
 	"""
+	
+	makedirs("submissions")
 	
 	for i in sample:
 		filepath = samples[i.upper()]
