@@ -74,7 +74,7 @@ def solution(C, P, filepath):
 def main():                                        #
 	### Here goes the action you want to do ########  
 	base = Base(samples, get_entries, solution)    #
-	base.create_submissions()                      #
+	# base.create_submissions()                    #
 	# base.execute_solution(("A"))                 #
                                                        #
 if __name__ == "__main__":                             #
